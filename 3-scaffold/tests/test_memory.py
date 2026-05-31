@@ -1,5 +1,4 @@
 import pytest
-
 from memory import InMemoryConversationMemory, MemoryManager
 
 

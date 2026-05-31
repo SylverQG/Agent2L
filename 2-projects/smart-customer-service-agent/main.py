@@ -12,7 +12,6 @@ from typing import Any
 from dotenv import load_dotenv
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
-
 from tools import create_ticket, check_order_status, search_knowledge_base
 
 load_dotenv()

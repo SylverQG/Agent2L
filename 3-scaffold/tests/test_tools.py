@@ -1,5 +1,4 @@
 import pytest
-
 from tools import ToolRegistry, calculator, current_datetime
 
 

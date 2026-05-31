@@ -55,10 +55,18 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install -r 2-projects/code-review-agent/requirements.txt
+          pip install -r 2-projects/data-analysis-agent/requirements.txt
+          pip install -r 2-projects/smart-customer-service-agent/requirements.txt
+          pip install -r 3-scaffold/requirements.txt
           pip install pytest
 
       - name: 运行测试
-        run: pytest
+        run: |
+          pytest 2-projects/code-review-agent/tests --tb=short
+          pytest 2-projects/data-analysis-agent/tests --tb=short
+          pytest 2-projects/smart-customer-service-agent/tests --tb=short
+          pytest 3-scaffold/tests --tb=short
 
   build:  # Docker 镜像构建验证
     runs-on: ubuntu-latest

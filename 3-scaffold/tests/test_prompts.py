@@ -1,5 +1,4 @@
 import pytest
-
 from prompts import SystemPromptBuilder, build_system_prompt
 
 
