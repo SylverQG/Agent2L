@@ -1,9 +1,5 @@
-import sys
-import os
 import re
 import pytest
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from tools import search_knowledge_base, create_ticket, check_order_status
 
