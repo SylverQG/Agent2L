@@ -1,0 +1,2 @@
+# 确保 ipynb 文件使用 LF 换行符，避免 CRLF 导致 GitHub 渲染服务超时
+*.ipynb text eol=lf
