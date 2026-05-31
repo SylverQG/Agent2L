@@ -11,13 +11,14 @@ import sys
 import textwrap
 import traceback
 from typing import Any
+
 import matplotlib
-matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
-from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 
+matplotlib.use("Agg")
 
 CODE_GENERATION_PROMPT = """You are a data analysis assistant. \
 You have a pandas DataFrame named `df` loaded with the following columns and types:

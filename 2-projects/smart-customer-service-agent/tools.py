@@ -4,9 +4,8 @@
 提供知识库检索、创建支持工单和查询订单状态等工具函数，
 供主程序中的 LLM Agent 调用。
 """
-from typing import Any
 import uuid
-
+from typing import Any
 
 KNOWLEDGE_BASE: dict[str, str] = {
     "return policy": "Our return policy allows returns within 30 days of purchase. "

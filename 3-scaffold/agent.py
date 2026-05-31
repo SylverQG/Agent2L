@@ -11,13 +11,12 @@ from __future__ import annotations
 
 from typing import Any, Callable
 
+from config import config
 from langchain_anthropic import ChatAnthropic
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
-
-from config import config
 from memory import MemoryManager
 from tools import ToolRegistry
 
