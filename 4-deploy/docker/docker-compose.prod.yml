@@ -1,0 +1,14 @@
+services:
+  agent-course:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: agent-course:latest
+    container_name: agent-course
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/workspace
+    env_file:
+      - .env
+    restart: unless-stopped

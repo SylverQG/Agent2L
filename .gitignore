@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+
+# Virtual Environment
+venv/
+.venv/
+env/
+.env/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Docker
+.docker/
+
+# Logs
+*.log
+
+# Environment Configuration
+.env
+.env.local
+.env.*.local
+
+# API Keys
+*.key
+*.pem
+
+# Vector Store Data
+*.chroma
+chroma_data/
+faiss_index/
+
+# Miscellaneous
+node_modules/
+tmp/
+temp/

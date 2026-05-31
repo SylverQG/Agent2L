@@ -1,0 +1,44 @@
+{
+  "title": "Agent Course Monitoring",
+  "uid": "agent-course-monitoring",
+  "version": 1,
+  "timezone": "browser",
+  "panels": [
+    {
+      "title": "Uptime",
+      "type": "stat",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "up{job=\"agent-course\"}",
+          "legendFormat": "Uptime"
+        }
+      ],
+      "description": "Indicates whether the agent-course application is up (1) or down (0)"
+    },
+    {
+      "title": "Request Rate",
+      "type": "graph",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 0 },
+      "targets": [
+        {
+          "expr": "rate(http_requests_total{job=\"agent-course\"}[5m])",
+          "legendFormat": "Requests/s"
+        }
+      ],
+      "description": "HTTP request rate averaged over 5-minute windows"
+    },
+    {
+      "title": "Memory Usage",
+      "type": "graph",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 0 },
+      "targets": [
+        {
+          "expr": "process_resident_memory_bytes{job=\"agent-course\"}",
+          "legendFormat": "Memory (bytes)"
+        }
+      ],
+      "description": "Resident memory usage of the agent-course process in bytes"
+    }
+  ]
+}
