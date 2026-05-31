@@ -29,7 +29,8 @@ SYSTEM_PROMPT = (
     "To use a tool, you MUST respond with a JSON block in the following format:\n"
     '{"tool": "tool_name", "arguments": {"arg1": "value1", "arg2": "value2"}}\n'
     "\n"
-    "After receiving the tool result, provide a natural language response to the customer.\n"
+    "After receiving the tool result, provide a natural language "
+    "response to the customer.\n"
     "\n"
     "If the customer greets you, greet them back without using any tool.\n"
     "If the customer is saying goodbye, say goodbye warmly.\n"

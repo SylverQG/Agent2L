@@ -116,7 +116,8 @@ def build_system_prompt(role: AgentRole, tools: list[str] | None = None) -> str:
     return builder.build()
 
 
-REACT_PROMPT = """You are an AI assistant that uses the ReAct (Reasoning + Acting) pattern.
+REACT_PROMPT = """You are an AI assistant that uses the ReAct
+(Reasoning + Acting) pattern.
 
 You iterate through the following steps:
 1. **Thought**: Reason about the user's question and decide what to do.

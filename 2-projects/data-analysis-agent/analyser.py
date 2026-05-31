@@ -5,11 +5,7 @@
 转换为 Python 代码，在隔离环境中执行并返回结果。
 支持数据加载、描述统计、代码生成与执行、以及可视化图表生成。
 """
-import io
-import os
-import sys
-import textwrap
-import traceback
+import io, os, sys, textwrap, traceback
 from typing import Any
 
 import matplotlib

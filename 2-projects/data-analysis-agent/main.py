@@ -4,8 +4,7 @@
 提供命令行交互工具，加载 CSV、Excel 或 JSON 数据文件后，
 用户可以通过自然语言对数据进行查询和分析，支持生成可视化图表。
 """
-import os
-import sys
+import os, sys
 
 from dotenv import load_dotenv
 

@@ -1,6 +1,6 @@
 import re
 
-from tools import search_knowledge_base, create_ticket, check_order_status
+from tools import check_order_status, create_ticket, search_knowledge_base
 
 
 class TestSearchKnowledgeBase:

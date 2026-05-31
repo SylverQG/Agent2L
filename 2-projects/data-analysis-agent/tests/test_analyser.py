@@ -63,7 +63,8 @@ class TestExtractCode:
     def test_extract_code_multiline_code_block(self, agent):
         text = (
             '```python\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n'
-            'df = pd.DataFrame({"a": [1, 2, 3]})\nprint(df)\nplt.plot(df)\nplt.show()\n```'
+            'df = pd.DataFrame({"a": [1, 2, 3]})\nprint(df)\n'
+            'plt.plot(df)\nplt.show()\n```'
         )
         code = agent._extract_code(text)
         assert code is not None

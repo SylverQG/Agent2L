@@ -7,8 +7,8 @@
 from dataclasses import dataclass, field
 from typing import Literal
 
-from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_openai import ChatOpenAI
 
 Severity = Literal["critical", "major", "minor", "suggestion"]
 Category = Literal["quality", "security", "style", "performance"]

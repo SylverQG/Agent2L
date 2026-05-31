@@ -17,7 +17,8 @@ KNOWLEDGE_BASE: dict[str, str] = {
     "International shipping may take 10-15 business days.",
     "reset password": (
         "To reset your password, go to the login page and click 'Forgot Password'. "
-        "Enter your registered email address and we will send you a password reset link."
+        "Enter your registered email address "
+        "and we will send you a password reset link."
     ),
     "payment methods": (
         "We accept Visa, MasterCard, American Express, PayPal, and Apple Pay."
