@@ -1,6 +1,5 @@
 import os
 import pytest
-
 from analyser import DataAnalysisAgent
 
 
