@@ -103,7 +103,11 @@ registry = ToolRegistry()
 @langchain_tool
 def web_search(query: str) -> str:
     """搜索网络获取当前信息。当前返回占位结果，需接入 SerpAPI / Tavily 等实现。"""
-    return f'[web_search] Results for "{query}": (placeholder — implement with SerpAPI / Tavily)'
+    placeholder = (
+        f'[web_search] Results for "{query}": '
+        "(placeholder — implement with SerpAPI / Tavily)"
+    )
+    return placeholder
 
 
 @langchain_tool

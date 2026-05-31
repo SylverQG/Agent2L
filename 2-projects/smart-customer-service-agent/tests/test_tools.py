@@ -1,5 +1,4 @@
 import re
-import pytest
 
 from tools import search_knowledge_base, create_ticket, check_order_status
 

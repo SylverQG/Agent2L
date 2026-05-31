@@ -54,7 +54,9 @@ class SystemPromptBuilder:
         """
         if tool_names:
             tools_str = ", ".join(tool_names)
-            self._sections.append(f"You have access to the following tools: {tools_str}.")
+            self._sections.append(
+                f"You have access to the following tools: {tools_str}."
+            )
         return self
 
     def add_memory_note(self) -> "SystemPromptBuilder":
@@ -90,9 +92,18 @@ def build_system_prompt(role: AgentRole, tools: list[str] | None = None) -> str:
     builder = SystemPromptBuilder()
 
     role_map: dict[AgentRole, str] = {
-        "assistant": "You are a helpful AI assistant that answers user questions accurately and concisely.",
-        "researcher": "You are a research assistant. You gather information, analyze data, and provide well-sourced answers.",
-        "coder": "You are a coding assistant. You write clean, well-tested code and explain technical concepts clearly.",
+        "assistant": (
+            "You are a helpful AI assistant that answers user questions "
+            "accurately and concisely."
+        ),
+        "researcher": (
+            "You are a research assistant. You gather information, "
+            "analyze data, and provide well-sourced answers."
+        ),
+        "coder": (
+            "You are a coding assistant. You write clean, well-tested "
+            "code and explain technical concepts clearly."
+        ),
         "custom": "You are an AI assistant.",
     }
 

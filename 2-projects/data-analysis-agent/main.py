@@ -8,6 +8,7 @@ import os
 import sys
 
 from dotenv import load_dotenv
+
 from analyser import DataAnalysisAgent
 
 load_dotenv()

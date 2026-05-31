@@ -9,7 +9,7 @@ MemoryManager 作为统一入口，负责切换不同记忆后端。
 
 from __future__ import annotations
 
-from typing import Any, Protocol
+from typing import Protocol
 
 
 class Memory(Protocol):

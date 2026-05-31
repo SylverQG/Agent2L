@@ -6,6 +6,7 @@
 """
 from dataclasses import dataclass, field
 from typing import Literal
+
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
@@ -52,7 +53,9 @@ class ReviewReport:
         返回:
             字典，键为问题类别（quality/security/style/performance），值为对应数量
         """
-        counts: dict[str, int] = {"quality": 0, "security": 0, "style": 0, "performance": 0}
+        counts: dict[str, int] = {
+            "quality": 0, "security": 0, "style": 0, "performance": 0,
+        }
         for f in self.findings:
             counts[f.category] += 1
         return counts
@@ -68,7 +71,7 @@ class ReviewReport:
         """
         lines = [
             "=" * 60,
-            f"  Code Review Report",
+            "  Code Review Report",
             f"  File: {self.filename}",
             f"  Language: {self.language}",
             f"  Total Lines: {self.total_lines}",
@@ -90,11 +93,17 @@ class ReviewReport:
         lines.append("-" * 60)
 
         severity_order = {"critical": 0, "major": 1, "minor": 2, "suggestion": 3}
-        sorted_findings = sorted(self.findings, key=lambda f: (severity_order.get(f.severity, 99), f.line))
+        sorted_findings = sorted(
+            self.findings,
+            key=lambda f: (severity_order.get(f.severity, 99), f.line),
+        )
 
         for i, finding in enumerate(sorted_findings, 1):
-            lines.append(f"")
-            lines.append(f"  #{i} [{finding.severity.upper()}] [{finding.category.capitalize()}]")
+            lines.append("")
+            lines.append(
+                f"  #{i} [{finding.severity.upper()}]"
+                f" [{finding.category.capitalize()}]"
+            )
             lines.append(f"  Line {finding.line}: {finding.description}")
             lines.append(f"  Suggestion: {finding.suggestion}")
 
@@ -107,7 +116,9 @@ class CodeReviewer:
     通过向 LLM 发送代码内容和审查指令，获取结构化的审查结果，
     并将 LLM 返回的 JSON 解析为 Finding 对象列表。
     """
-    REVIEW_PROMPT = """You are a senior code reviewer. Analyze the provided code and identify issues in these categories:
+    REVIEW_PROMPT = (
+        """You are a senior code reviewer. Analyze the provided code """
+        """and identify issues in these categories:
 - quality: Code quality issues (logic errors, dead code, anti-patterns, etc.)
 - security: Security vulnerabilities (injection, XSS, hardcoded secrets, etc.)
 - style: Style issues (naming conventions, formatting, etc.)
@@ -128,6 +139,7 @@ Code to review:
 ```{language}
 {code}
 ```"""
+    )
 
     def __init__(self, model: str = "gpt-4o-mini", temperature: float = 0.3):
         """初始化 CodeReviewer 实例。
@@ -178,7 +190,10 @@ Code to review:
         total_lines = code.count("\n") + 1
 
         messages = [
-            SystemMessage(content="You are a senior code reviewer. Output ONLY valid JSON, no other text."),
+            SystemMessage(
+                content="You are a senior code reviewer."
+                " Output ONLY valid JSON, no other text."
+            ),
             HumanMessage(
                 content=self.REVIEW_PROMPT.format(language=language, code=code)
             ),

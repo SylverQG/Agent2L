@@ -1,3 +1,5 @@
+import os
+
 import pytest
 
 from analyser import DataAnalysisAgent
@@ -28,7 +30,10 @@ class TestExtractCode:
         return DataAnalysisAgent()
 
     def test_extract_python_code_block(self, agent):
-        text = 'Some text\n```python\nimport pandas as pd\nprint(df.head())\n```\nmore text'
+        text = (
+            'Some text\n```python\nimport pandas as pd\n'
+            'print(df.head())\n```\nmore text'
+        )
         code = agent._extract_code(text)
         assert code is not None
         assert "import pandas as pd" in code
@@ -56,7 +61,10 @@ class TestExtractCode:
         assert code is None
 
     def test_extract_code_multiline_code_block(self, agent):
-        text = '```python\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\ndf = pd.DataFrame({"a": [1, 2, 3]})\nprint(df)\nplt.plot(df)\nplt.show()\n```'
+        text = (
+            '```python\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n'
+            'df = pd.DataFrame({"a": [1, 2, 3]})\nprint(df)\nplt.plot(df)\nplt.show()\n```'
+        )
         code = agent._extract_code(text)
         assert code is not None
         assert "import matplotlib.pyplot" in code

@@ -1,5 +1,3 @@
-import pytest
-
 from reviewers import Finding, ReviewReport
 
 
@@ -63,8 +61,14 @@ class TestReviewReport:
 
     def test_create_report_with_findings(self):
         findings = [
-            Finding(category="quality", severity="major", line=10, description="Bug", suggestion="Fix it"),
-            Finding(category="style", severity="minor", line=20, description="Format", suggestion="Reformat"),
+            Finding(
+                category="quality", severity="major", line=10,
+                description="Bug", suggestion="Fix it",
+            ),
+            Finding(
+                category="style", severity="minor", line=20,
+                description="Format", suggestion="Reformat",
+            ),
         ]
         report = ReviewReport(
             filename="app.js",
@@ -76,11 +80,26 @@ class TestReviewReport:
 
     def test_summary_returns_dict_with_correct_keys(self):
         findings = [
-            Finding(category="quality", severity="major", line=1, description="A", suggestion="Fix"),
-            Finding(category="security", severity="critical", line=2, description="B", suggestion="Fix"),
-            Finding(category="quality", severity="minor", line=3, description="C", suggestion="Fix"),
-            Finding(category="performance", severity="suggestion", line=4, description="D", suggestion="Fix"),
-            Finding(category="style", severity="minor", line=5, description="E", suggestion="Fix"),
+            Finding(
+                category="quality", severity="major", line=1,
+                description="A", suggestion="Fix",
+            ),
+            Finding(
+                category="security", severity="critical", line=2,
+                description="B", suggestion="Fix",
+            ),
+            Finding(
+                category="quality", severity="minor", line=3,
+                description="C", suggestion="Fix",
+            ),
+            Finding(
+                category="performance", severity="suggestion", line=4,
+                description="D", suggestion="Fix",
+            ),
+            Finding(
+                category="style", severity="minor", line=5,
+                description="E", suggestion="Fix",
+            ),
         ]
         report = ReviewReport(
             filename="test.py",

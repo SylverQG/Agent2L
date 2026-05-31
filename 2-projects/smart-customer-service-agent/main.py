@@ -4,36 +4,39 @@
 提供基于 LangChain 与大语言模型的智能客服交互功能。
 支持知识库检索、创建工单和查询订单状态三种工具。
 """
+import json
 import os
 import sys
-import json
 from typing import Any
 
 from dotenv import load_dotenv
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
-from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
 
-from tools import search_knowledge_base, create_ticket, check_order_status
+from tools import create_ticket, check_order_status, search_knowledge_base
 
 load_dotenv()
 
-SYSTEM_PROMPT = """You are a smart customer service assistant. Your role is to help customers with their inquiries.
-
-You have access to the following tools:
-1. search_knowledge_base(query: str) - Search the knowledge base for answers
-2. create_ticket(customer_name: str, issue: str) - Create a support ticket
-3. check_order_status(order_id: str) - Check the status of an order
-
-To use a tool, you MUST respond with a JSON block in the following format:
-{"tool": "tool_name", "arguments": {"arg1": "value1", "arg2": "value2"}}
-
-After receiving the tool result, provide a natural language response to the customer.
-
-If the customer greets you, greet them back without using any tool.
-If the customer is saying goodbye, say goodbye warmly.
-If you cannot determine what the customer needs, ask clarifying questions.
-
-Always be polite, professional, and helpful."""
+SYSTEM_PROMPT = (
+    "You are a smart customer service assistant. "
+    "Your role is to help customers with their inquiries.\n"
+    "\n"
+    "You have access to the following tools:\n"
+    "1. search_knowledge_base(query: str) - Search the knowledge base for answers\n"
+    "2. create_ticket(customer_name: str, issue: str) - Create a support ticket\n"
+    "3. check_order_status(order_id: str) - Check the status of an order\n"
+    "\n"
+    "To use a tool, you MUST respond with a JSON block in the following format:\n"
+    '{"tool": "tool_name", "arguments": {"arg1": "value1", "arg2": "value2"}}\n'
+    "\n"
+    "After receiving the tool result, provide a natural language response to the customer.\n"
+    "\n"
+    "If the customer greets you, greet them back without using any tool.\n"
+    "If the customer is saying goodbye, say goodbye warmly.\n"
+    "If you cannot determine what the customer needs, ask clarifying questions.\n"
+    "\n"
+    "Always be polite, professional, and helpful."
+)
 
 TOOL_MAP: dict[str, Any] = {
     "search_knowledge_base": search_knowledge_base,
@@ -93,7 +96,10 @@ def run_agent(user_input: str, llm: ChatOpenAI, messages: list) -> str:
         arguments = tool_call.get("arguments", {})
 
         if tool_name not in TOOL_MAP:
-            error_msg = f"Unknown tool: {tool_name}. Available tools: {', '.join(TOOL_MAP.keys())}"
+            error_msg = (
+                f"Unknown tool: {tool_name}. "
+                f"Available tools: {', '.join(TOOL_MAP.keys())}"
+            )
             messages.append(SystemMessage(content=error_msg))
             return error_msg
 

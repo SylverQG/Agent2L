@@ -18,7 +18,7 @@ from langchain_ollama import ChatOllama
 from langchain_openai import ChatOpenAI
 
 from config import config
-from memory import InMemoryConversationMemory, MemoryManager
+from memory import MemoryManager
 from tools import ToolRegistry
 
 
@@ -160,7 +160,11 @@ class ReActAgent(Agent):
         Returns:
             LLM 生成的响应文本。
         """
-        prompt = f"{self.system_prompt}\n\nUser: {task}\n\nAvailable tools: {[t['name'] for t in self.tools.list_tools()]}"
+        tool_names = [t['name'] for t in self.tools.list_tools()]
+        prompt = (
+            f"{self.system_prompt}\n\nUser: {task}\n\n"
+            f"Available tools: {tool_names}"
+        )
         self.memory_manager.add_message("user", task)
 
         messages = self._build_messages(task)

@@ -5,23 +5,24 @@
 转换为 Python 代码，在隔离环境中执行并返回结果。
 支持数据加载、描述统计、代码生成与执行、以及可视化图表生成。
 """
+import io
 import os
 import sys
-import io
 import textwrap
 import traceback
 from typing import Any
 
-import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import pandas as pd
 
-from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
+from langchain_openai import ChatOpenAI
 
 
-CODE_GENERATION_PROMPT = """You are a data analysis assistant. You have a pandas DataFrame named `df` loaded with the following columns and types:
+CODE_GENERATION_PROMPT = """You are a data analysis assistant. \
+You have a pandas DataFrame named `df` loaded with the following columns and types:
 
 {column_info}
 
@@ -99,7 +100,11 @@ class DataAnalysisAgent:
 
         self.filename = os.path.basename(filepath)
         rows, cols = self.df.shape
-        return f"Successfully loaded '{self.filename}': {rows} rows × {cols} columns\n\nColumns: {', '.join(self.df.columns.tolist())}"
+        cols_str = ', '.join(self.df.columns.tolist())
+        return (
+            f"Successfully loaded '{self.filename}': {rows} rows × {cols} columns"
+            f"\n\nColumns: {cols_str}"
+        )
 
     def _get_column_info(self) -> str:
         """获取 DataFrame 各列的数据类型和空值信息。
@@ -172,7 +177,9 @@ class DataAnalysisAgent:
         plot_path = self._get_plot_path()
 
         messages = [
-            SystemMessage(content="You are a data analysis expert. Output ONLY Python code."),
+            SystemMessage(
+                content="You are a data analysis expert. Output ONLY Python code."
+            ),
             HumanMessage(
                 content=CODE_GENERATION_PROMPT.format(
                     column_info=column_info,
@@ -188,7 +195,10 @@ class DataAnalysisAgent:
         code = self._extract_code(response.content.strip())
 
         if code is None:
-            return "I couldn't generate analysis code. Please try rephrasing your question."
+            return (
+                "I couldn't generate analysis code. "
+                "Please try rephrasing your question."
+            )
 
         result_text = self._execute_code(code)
         plot_result = ""
@@ -247,7 +257,7 @@ class DataAnalysisAgent:
             exec(compiled, local_vars)
             output = sys.stdout.getvalue().strip()
             return output if output else "Analysis completed successfully."
-        except Exception as e:
+        except Exception:
             tb = traceback.format_exc()
             return f"Error during analysis:\n{tb}"
         finally:

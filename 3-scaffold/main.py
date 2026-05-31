@@ -95,7 +95,8 @@ def main() -> None:
         agent = ReActAgent(tools=registry, system_prompt=system_prompt)
         print("[ReActAgent mode]")
     elif agent_type == "tooluse":
-        system_prompt = build_system_prompt("assistant", [t["name"] for t in registry.list_tools()])
+        tool_names = [t["name"] for t in registry.list_tools()]
+        system_prompt = build_system_prompt("assistant", tool_names)
         agent = ToolUsingAgent(tools=registry, system_prompt=system_prompt)
         print("[ToolUsingAgent mode]")
     else:

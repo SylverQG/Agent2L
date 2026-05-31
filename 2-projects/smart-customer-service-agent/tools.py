@@ -4,8 +4,8 @@
 提供知识库检索、创建支持工单和查询订单状态等工具函数，
 供主程序中的 LLM Agent 调用。
 """
-from typing import Any
 import uuid
+from typing import Any
 
 
 KNOWLEDGE_BASE: dict[str, str] = {
@@ -15,12 +15,21 @@ KNOWLEDGE_BASE: dict[str, str] = {
     "shipping time": "Standard shipping takes 5-7 business days. "
     "Express shipping takes 2-3 business days. "
     "International shipping may take 10-15 business days.",
-    "reset password": "To reset your password, go to the login page and click 'Forgot Password'. "
-    "Enter your registered email address and we will send you a password reset link.",
-    "payment methods": "We accept Visa, MasterCard, American Express, PayPal, and Apple Pay.",
-    "refund": "Refunds are processed within 5-10 business days after we receive your return. "
-    "The refund will be issued to your original payment method.",
-    "warranty": "All products come with a 1-year manufacturer warranty covering defects in materials and workmanship.",
+    "reset password": (
+        "To reset your password, go to the login page and click 'Forgot Password'. "
+        "Enter your registered email address and we will send you a password reset link."
+    ),
+    "payment methods": (
+        "We accept Visa, MasterCard, American Express, PayPal, and Apple Pay."
+    ),
+    "refund": (
+        "Refunds are processed within 5-10 business days after we receive your return. "
+        "The refund will be issued to your original payment method."
+    ),
+    "warranty": (
+        "All products come with a 1-year manufacturer warranty "
+        "covering defects in materials and workmanship."
+    ),
     "contact": "You can reach our support team via email at support@example.com "
     "or call us at 1-800-555-0199, Monday to Friday, 9 AM to 6 PM.",
 }
